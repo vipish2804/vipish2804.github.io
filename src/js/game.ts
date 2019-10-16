@@ -26,7 +26,7 @@ import {getQueryParam, isIOS} from './utils';
 import {shuffle} from 'lodash';
 import * as tfc from '@tensorflow/tfjs-core';
 import {SPEECH_SPRITE_TIMESTAMPS} from './speech_sprite_timestamps';
-import {EmojiItem, EMOJIS_LVL_1} from './game_levels';
+import {EmojiItem, EMOJIS_LVL_1, EMOJIS_LVL_DEMO} from './game_levels';
 
 export const GAME_START_TIME = 20;
 export const GAME_EXTEND_TIME = 10;
@@ -90,10 +90,6 @@ export class Game {
   /** Speak interval for reading out objects from the camera every x seconds. */
   speakInterval: number;
   emojiLvl1: Array<EmojiItem>;
-  emojiLvl2: Array<EmojiItem>;
-  emojiLvl3: Array<EmojiItem>;
-  emojiLvl4: Array<EmojiItem>;
-  emojiLvl5: Array<EmojiItem>;
   emojiLvlDemo: Array<EmojiItem>;
   /**
    * A lookup containing references to each level of emoji which can be used
@@ -145,18 +141,10 @@ export class Game {
     };
 
     this.emojiLvl1 = shuffle(EMOJIS_LVL_1);
-    this.emojiLvl2 = shuffle(EMOJIS_LVL_2);
-    this.emojiLvl3 = shuffle(EMOJIS_LVL_3);
-    this.emojiLvl4 = shuffle(EMOJIS_LVL_4);
-    this.emojiLvl5 = shuffle(EMOJIS_LVL_5);
     this.emojiLvlDemo = Array.from(EMOJIS_LVL_DEMO);
 
     this.emojiLvlLookup = {
       '1': this.emojiLvl1,
-      '2': this.emojiLvl2,
-      '3': this.emojiLvl3,
-      '4': this.emojiLvl4,
-      '5': this.emojiLvl5,
       '#': this.emojiLvlDemo
     };
 
@@ -684,18 +672,6 @@ export class Game {
     switch (level) {
       case '1':
         this.emojiLvlLookup[level] = shuffle(EMOJIS_LVL_1);
-        break;
-      case '2':
-        this.emojiLvlLookup[level] = shuffle(EMOJIS_LVL_2);
-        break;
-      case '3':
-        this.emojiLvlLookup[level] = shuffle(EMOJIS_LVL_3);
-        break;
-      case '4':
-        this.emojiLvlLookup[level] = shuffle(EMOJIS_LVL_4);
-        break;
-      case '5':
-        this.emojiLvlLookup[level] = shuffle(EMOJIS_LVL_5);
         break;
       case '#':
         // NOTE: the Demo list is not shuffled since we always request them in
